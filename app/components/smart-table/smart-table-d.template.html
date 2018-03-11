@@ -1,0 +1,78 @@
+<div class='d-st-container'>
+	<!-- table -->
+	<table class="d-st-table d-st-zebra" id="smart_table_{{::vm.randomTableId}}"
+		data-st-table="vm.table.data"
+		data-st-safe-src="vm.table.safeData">
+		<thead class="d-st-tableheader">
+			<tr>
+				<th class="st-pointer" data-ng-repeat="config in vm.table.config" data-st-sort="{{::vm.table.config[$index].field}}"
+					data-ng-click="vm.setChangesToColumn($index)"
+					data-ng-style="{'width': config.width && vm.window.width > 840 ? config.width : vm.columnWidthForHeader}"
+					data-st-skip-natural="true">{{::config.name}}
+					<i class="fa st-ml-1 st-fontSize-16"
+						data-ng-class="{'fa-angle-down': vm.arrowDown, 'fa-angle-up': !vm.arrowDown}"
+						data-ng-if="vm.highlightedIndex === $index"></i>
+				</th>
+				<th class="st-pointer" data-ng-if="vm.table.showActions"
+					data-ng-style="{'width': vm.isCustomWidth && vm.window.width > 840 ? vm.actions.customWidthApplied : vm.columnWidthForHeader}"
+					data-ng-bind="vm.actionsTitle">
+				</th>
+			</tr>
+			<div class="row-fluid d-st-showOnSmallScreen" data-ng-if="!vm.table.hideSearchInputsMobile">
+				<div class="col-xs-12 col-sm-4 st-mb-1 st-p0">
+					<button type="button" class="d-xs-search-button dropdown-toggle"
+						data-toggle="dropdown" id="smallScreenSearch" aria-expanded="true" role="button">
+						Search by <span data-ng-bind="vm.selectedMobileSearch"></span>
+					</button>
+					<ul class="dropdown-menu" aria-labelledby="smallScreenSearch" role="menu">
+						<li data-ng-repeat="config in vm.table.config | filter:{showSearch:'true'}"
+							data-ng-click="vm.selectedMobileSearch = config.name; vm.selectedMobileField = config.field">
+							<a>
+								Search by {{::config.name}}
+							</a>
+						</li>
+					</ul>
+				</div>
+				<input class="col-xs-12 col-sm-8 st-mb-2 st-height44" type="text" data-ng-model="vm.rowSearch[vm.selectedMobileField]" placeholder="Search">
+			</div>
+
+			<tr class="d-st-desktopsearch" data-ng-if="!vm.table.hideSearchInputsDesk">
+				<th data-ng-repeat="conf in vm.table.config"
+					data-ng-class="{'st-highlightedCellBackground': vm.highlightedIndex === $index}"
+					data-ng-style="{'width': vm.isCustomWidth  && vm.window.width > 840 ? conf.width : vm.columnWidthForHeader}">
+					<input type="text"  class="d-st-responsive-input" data-ng-disabled="!conf.showSearch"
+						data-ng-model="vm.rowSearch[vm.table.config[$index].field]" id="searchByParamInput"
+						placeholder="{{::conf.name}} Search">
+				</th>						
+			</tr>
+		</thead>
+
+		
+			<tbody class="d-st-table-text" data-ng-style="{'height': vm.table.tableBodyHeight ? vm.table.tableBodyHeight : 450}">
+				<tr data-st-select-row="row" data-ng-repeat="row in vm.table.data | filter:vm.rowSearch"
+					data-ng-mouseover="vm.showActionsIndex = $index">
+					<td data-ng-repeat="conf in vm.table.config" class="text"
+						data-title="{{::vm.table.config[$index].name | uppercase}}"
+						data-ng-class="{'st-highlightedCellBackground': vm.highlightedIndex === $index}"
+						data-ng-style="{'width': vm.window.width > 840 ? vm.getWidthForTableBodyCells($index, $last, conf.width) : '100%'}">{{::row[conf.field]}}</td>
+					<td class='text' data-ng-if="vm.table.showActions && (vm.isMobile || vm.showActionsIndex === $index)"
+						data-title="{{::vm.actionsTitle | uppercase}}">
+						<i data-ng-if="vm.actions.view"
+							data-ng-click="vm.view(row)"
+							class="fa fa-eye st-pointer st-pr-04 font-size20"
+							data-ng-style="{'font-size': vm.isMobile ? 16 : 15}"
+							title="View Record">
+						</i>
+						<i data-ng-if="vm.actions.edit"
+							data-ng-click="vm.edit(row)"
+							title="Edit Record"
+							data-ng-style="{'font-size': vm.isMobile ? 16 : 15}"
+							class="fa fa-pencil st-pointer">
+						</i>
+					</td>
+				</tr>
+			</tbody>
+
+
+	</table>
+</div>

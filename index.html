@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  	<meta charset="utf-8">
+	  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	  	<title>Smart-Table-D</title>
+	  	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+	  	<link rel="stylesheet" href="assets/css/bootstrap/3.3.7/bootstrap.min.css">
+	  	<!-- Font Awesome -->
+	  	<link rel="stylesheet" href="assets/css/font-awesome/4.7.0/font-awesome.min.css">
+
+		<link href="https://fonts.googleapis.com/css?family=Nunito:200,300,300i,400,400i,600,600i,700,800,900" rel="stylesheet">
+
+		<link rel="stylesheet" href="assets/css/app.css">
+		<link rel="stylesheet" href="assets/css/d-box.css">
+		<link rel="stylesheet" href="assets/css/smart-table-d.css">
+		<link rel="stylesheet" href="assets/css/styles.css">	
+		
+
+	</head>
+	<body data-ng-app="smart" class="homeBody">
+		<div class="jumbotron text-center mb-0">
+		    <h1 data-ng-bind="$root.tableName"></h1>  
+		    <p>A data grid for <strong>AngularJS</strong></p>
+		</div>
+		
+		<div class="container-fluid content-container pt-3">
+			<div class="row">
+				<div class="col-xs-12">
+					<d-box header-name="'Full Table view'" is-open="true" class="row-fuid">
+						<smart-table-d  class="col-xs-12" data-ng-if="$root.baseSmartTableConf" table-config="$root.baseSmartTableConf"></smart-table-d>
+					</d-box>
+				</div>
+			</div>
+			<div class="row mt-2">
+				<div class="col-xs-12">
+					<d-box header-name="'Configuration object setup'" is-open="false" class="row-fuid">
+						<img src="assets/images/configImg.png"></img>
+					</d-box>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid content-container pt-3">
+			<div class="row">
+				<div class="col-md-6 col-xs-12">
+				    <div class="thumbnail">
+				      	<smart-table-d  class="col-xs-12 pt-2 pb-2" data-ng-if="$root.threeColTableConf" table-config="$root.threeColTableConf"></smart-table-d>
+				      	<div class="caption pt-1">
+							<ul>
+								<li><h4>Supports different number of columns</h4></li>
+								<li><h4>Column widths are equal if not specified manually.</h4></li>
+							</ul>
+							<d-box header-name="'Config'" is-open="false" class="row-fuid">
+								<pre>
+	var tableConfig = [{
+		name: 'Id',
+		field: 'id',
+		defaultSearchForMobile: true,
+		showSearch: false
+	}, {
+		name: 'First Name',
+		field: 'first_name',
+		showSearch: true
+	}, {
+		name: 'Last Name',
+		field: 'last_name',
+		showSearch: true
+	}];
+
+	$rootScope.threeColTableConf = {
+		data: tableData,
+		safeData: safeTableData,
+		config: tableConfig,
+		tableBodyHeight: 250,
+		showActions: true,
+		actionsConfig: {
+			title: 'Actions',
+			edit: {
+				stateName: 'editrole',
+				routerUrlParam: 'roleId',
+				fieldName: 'id'
+			},
+			view: {
+				stateName: 'viewrole',
+				routerUrlParam: 'roleId',
+				fieldName: 'id'
+			},
+			customWidthApplied: '10%'
+		}
+	};
+								</pre>
+							</d-box>
+				      	</div>
+				    </div>
+				</div>
+				<div class="col-md-6 col-xs-12">
+				    <div class="thumbnail">
+				      	<smart-table-d  class="col-xs-12 pt-2 pb-2" data-ng-if="$root.withoutActionsColConf" table-config="$root.withoutActionsColConf"></smart-table-d>
+				      	<div class="caption pt-1">
+							<ul>
+								<li><h4>You can remove 'Actions'column and/or rename it.</h4></li>
+								<li><h4>You can also disable search fields if needed. See 'ID' column.</h4></li>
+							</ul>
+							<d-box header-name="'Config'" is-open="false" class="row-fuid">
+								<pre>
+	var tableConfig = [{
+		name: 'Id',
+		field: 'id',
+		defaultSearchForMobile: true,
+		showSearch: false
+	}, {
+		name: 'First Name',
+		field: 'first_name',
+		showSearch: true
+	}, {
+		name: 'Last Name',
+		field: 'last_name',
+		showSearch: true
+	}];
+
+	$rootScope.withoutActionsColConf = {
+		data: tableData,
+		safeData: safeTableData,
+		config: tableConfig,
+		tableBodyHeight: 250
+	};
+								</pre>
+							</d-box>
+				      	</div>
+				    </div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-xs-12">
+				    <div class="thumbnail">
+				      	<smart-table-d  class="col-xs-12 pt-2 pb-2" data-ng-if="$root.predefinedColWidthConf" table-config="$root.predefinedColWidthConf"></smart-table-d>
+				      	<div class="caption">
+							<h4>Dynamically set column width</h4>
+							<p>Columns are now 15%/30%/55%</p>
+							<d-box header-name="'Config'" is-open="false" class="row-fuid">
+								<pre>
+	var tableConfig = [{
+		name: 'Id',
+		field: 'id',
+		width: '15%',
+		showSearch: true
+	}, {
+		name: 'First Name',
+		field: 'first_name',
+		width: '30%',
+		showSearch: true
+	}, {
+		name: 'Last Name',
+		field: 'last_name',
+		width: '55%',
+		showSearch: true
+	}];
+
+	$rootScope.predefinedColWidthConf = {
+		data: tableData,
+		safeData: safeTableData,
+		config: tableConfig,
+		tableBodyHeight: 200
+	};
+								</pre>
+							</d-box>
+				      	</div>
+				    </div>
+				</div>
+				<div class="col-md-6 col-xs-12">
+				    <div class="thumbnail">
+				      	<smart-table-d  class="col-xs-12 pt-2 pb-2" data-ng-if="$root.noSearchFields" table-config="$root.noSearchFields"></smart-table-d>
+				      	<div class="caption">
+							<h4>Remove search fields if needed.</h4>
+							<p>There are 2 properties, one for each (desktop or mobile) view, so you can choose to leave one or another. Or leave fields for both views.</p>
+							<p>This example shows hidden inputs on both mobile and desktop views.</p>
+							<d-box header-name="'Config'" is-open="false" class="row-fuid">
+								<pre>
+	var tableConfig = [{
+		name: 'Id',
+		field: 'id',
+		showSearch: true
+	}, {
+		name: 'First Name',
+		field: 'first_name',
+		showSearch: true
+	}, {
+		name: 'Last Name',
+		field: 'last_name',
+		showSearch: true
+	}];
+	$rootScope.noSearchFields = {
+		data: tableData,
+		safeData: safeTableData,
+		config: tableConfig,
+		hideSearchInputsDesk: true,
+		hideSearchInputsMobile: true,
+		tableBodyHeight: 200
+	};
+							</pre>
+						</d-box>
+				      	</div>
+				    </div>
+				</div>
+			</div>
+		</div>
+	 	
+		<!-- Scripts -->
+		<script src="assets/js/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+		<link href="https://fonts.googleapis.com/css?family=Nunito:200,300,300i,400,400i,600,600i,700,800,900" rel="stylesheet">
+		<!-- Bootstrap 3.3.7 -->
+		<script src="assets/js/bootstrap/3.3.7/bootstrap.min.js" type="text/javascript"></script>
+
+		<script src="assets/js/angular/angular.min.js" type="text/javascript"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-smart-table/2.1.8/smart-table.js"></script>
+		<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+		
+		<script src="app/app.js"></script>
+		
+		<script src="app/components/smart-table/smart-table-d.module.js"></script>
+		<script src="app/components/smart-table/smart-table-d.component.js"></script>
+		
+		<script src="app/components/d-box/d-box.component.js"></script>
+		
+		<script src="app/services/table-service.js"></script>
+	</body>
+</html>

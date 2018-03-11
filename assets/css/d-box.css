@@ -1,0 +1,36 @@
+d-box {
+	width: 100%;
+}
+
+body, button, h4 {
+	font-family: Nunito;
+}
+d-box button {
+	width: 100%;
+	color: white;
+	background-color: #345071;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: 1px solid #23a6d8;
+    border-radius: 10px 0px 0px 0px;
+    outline: none;
+}
+
+d-box button:hover {
+	background-color: #031531;
+}
+d-box button span {
+	float:left;
+	text-transform: uppercase;
+}
+d-box .d-box-body {
+	background-color: white;
+	display: block;
+	float: left;
+	height: auto;
+	width: 100%;
+	padding: 10px 5px;
+}
+.d-box-body {
+	overflow:auto;
+}
